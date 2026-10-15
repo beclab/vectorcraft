@@ -1,7 +1,7 @@
 .git
 **/target
 /dist
-/craft-fonts
+/craft-fonts/.git
 /corpus
 /log
 /plan

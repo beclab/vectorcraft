@@ -1,5 +1,5 @@
-image: docker.io/beclab/vectorcraft-web:0.11.0-2
-agentImage: docker.io/beclab/vectorcraft-agent:0.11.0-2
+image: docker.io/beclab/vectorcraft-web:0.11.0-3
+agentImage: docker.io/beclab/vectorcraft-agent:0.11.0-3
 imagePullPolicy: IfNotPresent
 
 workloads:

@@ -11,7 +11,10 @@ ARG CARGO_BUILD_JOBS=4
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
     --mount=type=cache,target=/src/target \
-    cargo build --release --locked -p vectorcraft-cli \
+    if [ -f craft-fonts/fonts/manifest.txt ]; then \
+        export CRAFT_FONTS_DIR=/src/craft-fonts CRAFT_FONTS_REQUIRED=1; \
+    fi \
+    && cargo build --release --locked -p vectorcraft-cli \
     && install -m 0755 target/release/vectorcraft-cli /usr/local/bin/vectorcraft-cli
 
 FROM node:${NODE_VERSION} AS runtime

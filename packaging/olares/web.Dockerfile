@@ -36,7 +36,10 @@ ARG CARGO_BUILD_JOBS=4
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
     --mount=type=cache,target=/src/target \
-    trunk build --release --locked \
+    if [ -f /src/craft-fonts/fonts/manifest.txt ]; then \
+        export CRAFT_FONTS_DIR=/src/craft-fonts CRAFT_FONTS_REQUIRED=1; \
+    fi \
+    && trunk build --release --locked \
     && test -s /src/dist/web/index.html \
     && gzip -9 -k /src/dist/web/*.wasm /src/dist/web/*.js /src/dist/web/index.html
 
