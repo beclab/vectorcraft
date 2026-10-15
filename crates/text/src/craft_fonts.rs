@@ -43,6 +43,10 @@ impl CraftFont {
     pub fn is_thai(&self) -> bool {
         self.scripts.contains(&"Thai")
     }
+    /// Is the font for Simplified Chinese text?
+    pub fn is_chinese(&self) -> bool {
+        self.scripts.contains(&"Hans")
+    }
     /// A serif (Mincho) family, for document text.
     pub fn is_mincho(&self) -> bool {
         self.family.contains("Mincho")
@@ -68,12 +72,14 @@ pub fn japanese_document_fonts() -> Vec<&'static CraftFont> {
 /// The craft-fonts faces the document font database loads: the Japanese ones in
 /// [`japanese_document_fonts`] order, then the Arabic ones in manifest order (Noto Sans Arabic
 /// first: the fallback for Arabic text; the other families are picked by name), then the Thai ones
-/// (Noto Sans Thai: the fallback for Thai text where no Thai font is installed, and on the web).
-/// Empty when built without craft-fonts.
+/// (Noto Sans Thai: the fallback for Thai text where no Thai font is installed, and on the web),
+/// then the Simplified Chinese ones (hanzi the Japanese fonts lack, where no Chinese font is
+/// installed). Empty when built without craft-fonts.
 pub fn document_fonts() -> Vec<&'static CraftFont> {
     let mut v = japanese_document_fonts();
     v.extend(CRAFT_FONTS.iter().filter(|f| f.is_arabic() && !f.is_japanese()));
     v.extend(CRAFT_FONTS.iter().filter(|f| f.is_thai() && !f.is_japanese() && !f.is_arabic()));
+    v.extend(CRAFT_FONTS.iter().filter(|f| f.is_chinese() && !f.is_japanese() && !f.is_arabic() && !f.is_thai()));
     v
 }
 
