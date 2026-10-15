@@ -5,6 +5,8 @@
 # Read by build.rs (the WEB_FONTS table) and `cargo xtask web-fonts` (copies the files, a Trunk hook).
 startup | Noto Sans Arabic | Regular
 startup | Noto Sans Thai | Regular
+# Simplified Chinese UI text: BIZ UDPGothic (the embedded UI font) lacks hanzi like 欢 编 对 选.
+startup | Noto Sans CJK SC | Regular
 background | Cairo | Regular
 background | Tajawal | ExtraLight
 background | Tajawal | Light

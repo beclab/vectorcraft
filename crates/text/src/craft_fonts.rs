@@ -110,10 +110,10 @@ mod tests {
             assert!(name.ends_with(".ttf") || name.ends_with(".otf"), "{}", w.url);
             assert!(w.integrity.starts_with("sha256-") && w.integrity.len() == "sha256-".len() + 44, "{}", w.integrity);
         }
-        // The fallbacks the first frame may need: Noto Sans Arabic and Noto Sans Thai, where the
-        // checkout has them.
+        // The fallbacks the first frame may need: Noto Sans Arabic, Noto Sans Thai and Noto Sans
+        // CJK SC, where the checkout has them.
         let startup: Vec<_> = WEB_FONTS.iter().filter(|w| w.startup).map(|w| w.family).collect();
-        let expected: Vec<_> = ["Noto Sans Arabic", "Noto Sans Thai"].into_iter().filter(|n| CRAFT_FONTS.iter().any(|f| f.family == *n)).collect();
+        let expected: Vec<_> = ["Noto Sans Arabic", "Noto Sans Thai", "Noto Sans CJK SC"].into_iter().filter(|n| CRAFT_FONTS.iter().any(|f| f.family == *n)).collect();
         assert_eq!(startup, expected);
     }
 }
